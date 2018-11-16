@@ -4,5 +4,15 @@ Done in database name library.
 SOLUTION: select b.book_id,b.title,b.publisher_name,ba.author_name,bc.number_of_copies,bc.branch_id from book b,book_author ba,book_copies bc where b.book_id=ba.book_id AND bc.book_id=b.book_id;
 
 2) To get the particulars of borrowers who borrowed more than 3 books during January 2017 to June 2017.
-SOLUTION: 
+SOLUTION: select card_number from book_lending where date_out between "" and "" group by card_number having count(*)>0;
+
+3) To delete a book in book_table and update the contents of other table to reflect this date manupulation operation.
+SOLUTION: delete from book where title="hitesh"; 
+
+4) To partition the book_table based on publication.
+SOLUTION: create view abc as select pub_year from book;
+
+5) To create a view of all books and its no. of copies that are currently available in the library.
+SOLUTION:  create view v as select b.book_id,b.title,bc.number_of_copies from book b,book_copies bc where b.book_id=bc.book_id;
+
       
