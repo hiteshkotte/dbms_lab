@@ -1,0 +1,8 @@
+Done in database name library.
+
+1) To retrieve details of all books in the library including id,title,name of publisher,author name, no. of copies in each branch.
+SOLUTION: select b.book_id,b.title,b.publisher_name,ba.author_name,bc.number_of_copies,bc.branch_id from book b,book_author ba,book_copies bc where b.book_id=ba.book_id AND bc.book_id=b.book_id;
+
+2) To get the particulars of borrowers who borrowed more than 3 books during January 2017 to June 2017.
+SOLUTION: 
+      
