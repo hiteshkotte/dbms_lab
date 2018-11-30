@@ -1,5 +1,4 @@
-1. 
-
+4. 
 select b.cno,t.publisher,t.title from class c,textbook t,book_adoption b where c.dept like 'computersc' and t.isbn = b.isbn and c.cno = b.cno and b.cno in (select cno from book_adoption group by cno having count(cno)>0) order by t.title asc;
 +-----+-----------+----------+
 | cno | publisher | title    |
@@ -11,3 +10,23 @@ select b.cno,t.publisher,t.title from class c,textbook t,book_adoption b where c
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+5.
+select dept from class where cno in (select cno from book_adoption where isbn in (select isbn from textbook where publisher = 'pearson'));
++------------+
+| dept       |
++------------+
+| computersc |
+| computersc |
+| mech       |
++------------+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+6.
+select distinct c.dept,t.publisher from class c,textbook t,book_adoption b where c.cno = b.cno and t.isbn = b.isbn and t.publisher = "pearson";
++------------+-----------+
+| dept       | publisher |
++------------+-----------+
+| computersc | pearson   |
+| mech       | pearson   |
++------------+-----------+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
