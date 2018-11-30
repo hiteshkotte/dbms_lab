@@ -1,0 +1,10 @@
+1. 
+
+select b.cno,t.publisher,t.title from class c,textbook t,book_adoption b where c.dept like 'computersc' and t.isbn = b.isbn and c.cno = b.cno and b.cno in (select cno from book_adoption group by cno having count(cno)>0) order by t.title asc;
++-----+-----------+----------+
+| cno | publisher | title    |
++-----+-----------+----------+
+| 302 | pearson   | business |
+| 304 | pearson   | dbms     |
+| 301 | tatamgh   | java-the |
++-----+-----------+----------+
