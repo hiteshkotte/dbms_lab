@@ -1,0 +1,73 @@
+select * from BRANCH;
++--------------+-----------+--------+
+| b_name       | b_city    | assets |
++--------------+-----------+--------+
+| abc          | chennai   |   3000 |
+| ainta        | mumbai    |   4000 |
+| baglur       | bangalore |   1000 |
+| kannur       | bangalore |   2000 |
+| kushal nagar | delhi     |   5500 |
++--------------+-----------+--------+
+5 rows in set (0.00 sec)
+
+select * from ACCOUNT;
++--------+--------+---------+
+| acc_no | b_name | balance |
++--------+--------+---------+
+|      1 | kannur |    1500 |
+|      2 | kannur |    2600 |
+|      3 | ainta  |    2600 |
+|      4 | baglur |    3500 |
+|      5 | abc    |     900 |
++--------+--------+---------+
+5 rows in set (0.00 sec)
+
+select * from DEPOSITOR;
++-----------+--------+
+| cust_name | acc_no |
++-----------+--------+
+| hitesh    |      1 |
+| kishor    |      2 |
+| jatin     |      3 |
+| tejas     |      4 |
+| guy       |      5 |
++-----------+--------+
+5 rows in set (0.00 sec)
+
+select * from CUSTOMER;
++-----------+--------------+-----------+
+| cust_name | cust_street  | cust_city |
++-----------+--------------+-----------+
+| guy       | telecom      | bangalore |
+| hitesh    | ashwathnagar | bangalore |
+| jatin     | ash          | channai   |
+| kishor    | ahgs         | chennai   |
+| tejas     | ajhsgfd      | mumbai    |
++-----------+--------------+-----------+
+5 rows in set (0.00 sec)
+
+select * from LOAN;
++---------+--------------+--------+
+| loan_no | branch_name  | amount |
++---------+--------------+--------+
+|      11 | baglur       |   1000 |
+|      22 | baglur       |   5000 |
+|      33 | kannur       |   2500 |
+|      44 | kushal nagar |   3500 |
+|      55 | abc          |   6000 |
++---------+--------------+--------+
+5 rows in set (0.00 sec)
+
+select * from BORROWER;
++--------+---------+
+| c_name | loan_no |
++--------+---------+
+| hitesh |      11 |
+| kishor |      22 |
+| tejas  |      33 |
+| jatin  |      44 |
+| guy    |      55 |
++--------+---------+
+5 rows in set (0.00 sec)
+
+
