@@ -1,0 +1,104 @@
+select * from AUTHOR;
++-----------+---------+-----------+---------+
+| author_id | name    | city      | country |
++-----------+---------+-----------+---------+
+|         1 | hitesh  | bangalore | India   |
+|         2 | Kishor  | bangalore | India   |
+|         3 | Kishore | bangalore | India   |
+|        11 | Kishor  | bangalore | India   |
+|        22 | Kishore | bangalore | India   |
+|        33 | Jatin   | bangalore | India   |
++-----------+---------+-----------+---------+
+6 rows in set (0.00 sec)
+
+
+select * from CATALOG;
++---------+---------+-----------+--------------+-------------+------+-------+
+| book_id | title   | author_id | publisher_id | category_id | year | price |
++---------+---------+-----------+--------------+-------------+------+-------+
+|   11111 | The ERA |         1 |          111 |        1111 | 2012 | 50000 |
+|   22222 | The ERA |         2 |          222 |        2222 | 2012 | 50000 |
+|   33333 | The ERA |         3 |          333 |        3333 | 2012 | 50000 |
++---------+---------+-----------+--------------+-------------+------+-------+
+3 rows in set (0.00 sec)
+
+
+select * from CATEGORY;
++-------------+-------------+
+| category_id | description |
++-------------+-------------+
+|        1111 | fiction     |
+|        2222 | love        |
+|        3333 | war         |
++-------------+-------------+
+3 rows in set (0.00 sec)
+
+
+select * from ORDERDETAILS;
++----------+---------+----------+
+| order_no | book_id | quantity |
++----------+---------+----------+
+|        7 |   11111 |        2 |
+|        8 |   22222 |        2 |
+|        9 |   33333 |        2 |
++----------+---------+----------+
+3 rows in set (0.00 sec)
+
+
+select * from PUBLISHER;
++--------+--------+-----------+---------+
+| pub_id | name   | city      | country |
++--------+--------+-----------+---------+
+|    111 | Jatin  | bangalore | India   |
+|    222 | hitesh | bangalore | India   |
+|    333 | kishor | bangalore | India   |
++--------+--------+-----------+---------+
+3 rows in set (0.00 sec)
+
+
+3.}
+select * from AUTHOR where author_id in (select author_id from CATALOG where price >= (select AVG(price) from CATALOG) and year > 2000)group by author_id having count(*)>=0;
++-----------+---------+-----------+---------+
+| author_id | name    | city      | country |
++-----------+---------+-----------+---------+
+|         1 | hitesh  | bangalore | India   |
+|         2 | Kishor  | bangalore | India   |
+|         3 | Kishore | bangalore | India   |
++-----------+---------+-----------+---------+
+3 rows in set (0.00 sec)
+
+4.}
+select a.name,a.author_id from AUTHOR a,CATALOG c,ORDERDETAILS o where o.book_id = c.book_id and c.author_id = a.author_id and o.quantity = (select max(quantity) from ORDERDETAILS);
++---------+-----------+
+| name    | author_id |
++---------+-----------+
+| hitesh  |         1 |
+| Kishor  |         2 |
+| Kishore |         3 |
++---------+-----------+
+3 rows in set (0.00 sec)
+
+5.}
+update CATALOG set price = price * 1.1 where publisher_id in (select publisher_id from PUBLISHER where name = 'kishor');
+Query OK, 3 rows affected (0.07 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from CATALOG;
++---------+---------+-----------+--------------+-------------+------+-------+
+| book_id | title   | author_id | publisher_id | category_id | year | price |
++---------+---------+-----------+--------------+-------------+------+-------+
+|   11111 | The ERA |         1 |          111 |        1111 | 2012 | 55000 |
+|   22222 | The ERA |         2 |          222 |        2222 | 2012 | 55000 |
+|   33333 | The ERA |         3 |          333 |        3333 | 2012 | 55000 |
++---------+---------+-----------+--------------+-------------+------+-------+
+3 rows in set (0.00 sec)
+
+
+6.}
+select a.name as 'author_id',c.book_id as 'book_id',c.title as 'book_title' from AUTHOR a,CATALOG c where a.author_id=c.author_id and a.name='hitesh';
++-----------+---------+------------+
+| author_id | book_id | book_title |
++-----------+---------+------------+
+| hitesh    |   11111 | The ERA    |
++-----------+---------+------------+
+1 row in set (0.01 sec)
